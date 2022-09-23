@@ -1,24 +1,24 @@
 import random as r
 
-def moveUp(board):
+def moveUp(board): # 0을 위쪽으로 옮김
     idx = board.index(0)
     if idx >= 3:
         board[idx], board[idx - 3] = board[idx - 3], board[idx]
     return board
 
-def moveDown(board):
+def moveDown(board): # 0을 아래쪽으로 옮김
     idx = board.index(0)
     if idx <= 5:
         board[idx], board[idx + 3] = board[idx + 3], board[idx]
     return board
 
-def moveLeft(board):
+def moveLeft(board): # 0을 왼쪽으로 옮김
     idx = board.index(0)
     if idx % 3 != 0:
         board[idx], board[idx - 1] = board[idx - 1], board[idx]
     return board
 
-def moveRight(board):
+def moveRight(board): # 0을 오른쪽으로 옮김
     idx = board.index(0)
     if idx % 3 != 2:
         board[idx], board[idx + 1] = board[idx + 1], board[idx]
@@ -30,7 +30,7 @@ def show(board):
     print(board[3], board[4], board[5])
     print(board[6], board[7], board[8])
 
-def huristic(board):
+def huristic(board): # 현재 board 각 칸에 있는 블럭이 목표 위치에 가기 위해 필요한 이동 횟수의 합 // 낮을수록 좋게 평가
     count = 0    
     for number in range(1, 9):
         t = board.index(number)
@@ -38,18 +38,18 @@ def huristic(board):
         count += calculate(t, p)
     return count
 
-def calculate(num1, num2):
+def calculate(num1, num2): # 이동 횟수 계산
     row = abs((num1 % 3) - (num2 % 3))
     col = abs((num1 // 3) - (num2 // 3))
     return row + col
-    
-def isMove(board, function):
+
+def isMove(board, function): # 0이 이동 불가능한 위치로 이동 명령을 받아 움직이지 못하면 False
     temp = board.copy()
     if board == function(temp):
         return False
     return True
 
-def moveAuto(board):
+def moveAuto(board): # 휴리스틱 함수에 기반하여 가장 최적의 움직임을 리턴
     if board == goal:
         return board
         
@@ -67,7 +67,7 @@ def moveAuto(board):
     
     return bestFunction[0](board)
 
-def moveRandom(board):
+def moveRandom(board): # 셔플용
     functionList = [moveUp, moveDown, moveLeft, moveRight]
     for function in functionList:
         if not isMove(board, function):
@@ -99,18 +99,18 @@ def main():
         elif user_input == 2:
             cnt = 0
             while True:
-                puzzle_board = moveAuto(puzzle_board)
-                cnt += 1
-                
                 if puzzle_board == goal:
                     show(puzzle_board)
-                    print("Solved : %d movement take" % cnt)
+                    print("Solved : %d Movement(s)" % cnt)
                     break
                 
                 if cnt == 1000:
                     show(puzzle_board)
                     print("Can't Solve")
                     break
+                
+                puzzle_board = moveAuto(puzzle_board)
+                cnt += 1
 
         elif user_input == 3:
             user_input = int(input("How many times? : "))
