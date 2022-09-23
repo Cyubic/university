@@ -1,7 +1,5 @@
 import random as r
 
-goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
-
 def moveUp(board):
     idx = board.index(0)
     if idx >= 3:
@@ -27,6 +25,7 @@ def moveRight(board):
     return board
 
 def show(board):
+    print("----------")
     print(board[0], board[1], board[2])
     print(board[3], board[4], board[5])
     print(board[6], board[7], board[8])
@@ -84,7 +83,7 @@ def main():
         show(puzzle_board)
         user_input = int(input("1. Move / 2. Huristic / 3. Shuffle : "))
         if user_input == 1:
-            user_input == int(input("1. Up / 2. Down / 3. Left / 4. Right : "))
+            user_input = int(input("1. Up / 2. Down / 3. Left / 4. Right : "))
             if user_input == 1:
                 puzzle_board = moveUp(puzzle_board)
         
@@ -117,6 +116,8 @@ def main():
             user_input = int(input("How many times? : "))
             for i in range(user_input):
                 puzzle_board = moveRandom(puzzle_board)
+                
+goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
 
 
 
