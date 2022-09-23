@@ -78,8 +78,7 @@ def moveRandom(board):
     return functionList[rd](board)
            
 def main():
-    # puzzle_board = [1, 2, 3, 4, 5, 6, 7, 8, 0]
-    puzzle_board = [3, 6, 0, 8, 1, 2, 7, 4, 5]
+    puzzle_board = [1, 2, 3, 4, 5, 6, 7, 8, 0]
          
     while True:
         show(puzzle_board)
